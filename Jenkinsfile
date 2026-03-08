@@ -38,7 +38,11 @@ pipeline {
                     --namespace dev \
                     --set image.repository=$DOCKER_ID/movie-service \
                     --set image.tag=$DOCKER_TAG \
-                    --set service.nodePort=30007
+                    --set service.nodePort=30007 \
+                    --set env[0].name=DATABASE_URI \
+                    --set env[0].value=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev \
+                    --set env[1].name=CAST_SERVICE_HOST_URL \
+                    --set env[1].value=http://cast_service:8000/api/v1/casts/
                 '''
             }
         }
@@ -50,7 +54,11 @@ pipeline {
                     --namespace qa \
                     --set image.repository=$DOCKER_ID/movie-service \
                     --set image.tag=$DOCKER_TAG \
-                    --set service.nodePort=30008
+                    --set service.nodePort=30008 \
+                    --set env[0].name=DATABASE_URI \
+                    --set env[0].value=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev \
+                    --set env[1].name=CAST_SERVICE_HOST_URL \
+                    --set env[1].value=http://cast_service:8000/api/v1/casts/
                 '''
             }
         }
@@ -62,7 +70,11 @@ pipeline {
                     --namespace staging \
                     --set image.repository=$DOCKER_ID/movie-service \
                     --set image.tag=$DOCKER_TAG \
-                    --set service.nodePort=30009
+                    --set service.nodePort=30009 \
+                    --set env[0].name=DATABASE_URI \
+                    --set env[0].value=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev \
+                    --set env[1].name=CAST_SERVICE_HOST_URL \
+                    --set env[1].value=http://cast_service:8000/api/v1/casts/
                 '''
             }
         }
@@ -78,10 +90,13 @@ pipeline {
                     --namespace prod \
                     --set image.repository=$DOCKER_ID/movie-service \
                     --set image.tag=$DOCKER_TAG \
-                    --set service.nodePort=30010
+                    --set service.nodePort=30010 \
+                    --set env[0].name=DATABASE_URI \
+                    --set env[0].value=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev \
+                    --set env[1].name=CAST_SERVICE_HOST_URL \
+                    --set env[1].value=http://cast_service:8000/api/v1/casts/
                 '''
             }
         }
-
     }
 }
