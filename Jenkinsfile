@@ -37,7 +37,8 @@ pipeline {
                 helm upgrade --install movie ./charts \
                     --namespace dev \
                     --set image.repository=$DOCKER_ID/movie-service \
-                    --set image.tag=$DOCKER_TAG
+                    --set image.tag=$DOCKER_TAG \
+                    --set service.nodePort=30007
                 '''
             }
         }
@@ -48,7 +49,8 @@ pipeline {
                 helm upgrade --install movie ./charts \
                     --namespace qa \
                     --set image.repository=$DOCKER_ID/movie-service \
-                    --set image.tag=$DOCKER_TAG
+                    --set image.tag=$DOCKER_TAG \
+                    --set service.nodePort=30008
                 '''
             }
         }
@@ -59,7 +61,8 @@ pipeline {
                 helm upgrade --install movie ./charts \
                     --namespace staging \
                     --set image.repository=$DOCKER_ID/movie-service \
-                    --set image.tag=$DOCKER_TAG
+                    --set image.tag=$DOCKER_TAG \
+                    --set service.nodePort=30009
                 '''
             }
         }
@@ -74,7 +77,8 @@ pipeline {
                 helm upgrade --install movie ./charts \
                     --namespace prod \
                     --set image.repository=$DOCKER_ID/movie-service \
-                    --set image.tag=$DOCKER_TAG
+                    --set image.tag=$DOCKER_TAG \
+                    --set service.nodePort=30010
                 '''
             }
         }
